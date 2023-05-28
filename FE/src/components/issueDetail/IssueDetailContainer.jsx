@@ -15,4 +15,5 @@ const MysIssueDetailContainer = styled.div`
   display: flex;
   width: 1280px;
   margin: 0px auto;
+  justify-content: space-around;
 `;

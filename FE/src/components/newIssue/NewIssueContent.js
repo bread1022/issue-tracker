@@ -33,7 +33,6 @@ const MyNewIssueContent = styled.form`
   gap: 10px;
   display: flex;
   flex-direction: column;
-  width: 938px;
 
   > div {
     width: 100%;

@@ -41,12 +41,12 @@ const MyCommentElements = styled.div`
     :first-child {
       background: ${colors.gray100};
       border-radius: 16px 16px 0px 0px;
-      border: 1px solid ${colors.gray400};
+      border: 1px solid ${colors.gray300};
     }
     :last-child {
       background: ${colors.gray50};
       border-radius: 0px 0px 16px 16px;
-      border: 1px solid ${colors.gray400};
+      border: 1px solid ${colors.gray300};
       border-top: none;
       height: 60px;
       padding-left: 20px;

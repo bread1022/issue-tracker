@@ -35,6 +35,7 @@ export const checkBoxReducer = (state, action) => {
       return { isAllChecked: false, checkedIssues: [] };
     }
     case 'CHANGE-OPEN': {
+      // state에 있는 issueId의 isOpen (key)의 !value 하여 저장
       return {
         ...state
       };

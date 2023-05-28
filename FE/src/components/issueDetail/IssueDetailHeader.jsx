@@ -76,18 +76,15 @@ export const IssueDetailHeader = () => {
           {CommentInfo?.length}개
         </p>
       </SubHeader>
-      <hr />
     </MyIssueDetailHeader>
   );
 };
 
 const MyIssueDetailHeader = styled.div`
   width: 1280px;
-  margin: 0 auto;
-  & hr {
-    margin: 20px;
-    background: ${colors.gray300};
-  }
+  margin: 0 auto 25px;
+  border-bottom: 1px solid ${colors.gray300};
+  padding-bottom: 25px;
 `;
 const SubHeader = styled.div`
   display: flex;

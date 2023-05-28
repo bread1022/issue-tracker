@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -58,13 +58,10 @@ export const IssueList = () => {
     });
   };
 
-  console.log(getFilterQueryString(filterState));
   return (
     <FilterStateContext.Provider
       value={{
-        // state, dispatch 사용안하면 context 삭제하기
         filterState,
-        filterStateDispatch,
         onResetFilter,
         onFilterIssues,
         onOpenIssues

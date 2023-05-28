@@ -63,10 +63,10 @@ const MyTextArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 938px;
   border-radius: 11px;
   background: ${({ isFocus }) => (isFocus ? `${colors.gray50}` : null)};
   box-shadow: ${({ isFocus }) => (isFocus ? `0 0 0 1px ${colors.blue}` : null)};
+  ${({ areaSize }) => areaSize};
 
   &: focus-within label {
     transform: translate(0, 12px) scale(0.8);

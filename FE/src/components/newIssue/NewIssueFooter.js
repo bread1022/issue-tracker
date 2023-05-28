@@ -37,7 +37,6 @@ export const NewIssueFooter = ({ titleValue, commentValue }) => {
 };
 
 const MyNewIssueFooter = styled.div`
-  width: 1280px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

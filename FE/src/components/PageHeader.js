@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MyHeader } from './Header';
 import { colors } from '../styles/color';
 
+// Title, subTitle,
 export const PageHeader = ({ leftChild, middleChild, rigthChild }) => {
   return (
     <MyPageHeader>

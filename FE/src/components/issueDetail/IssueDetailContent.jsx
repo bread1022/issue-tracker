@@ -35,8 +35,6 @@ const MyIssueDetailContent = styled.div`
   gap: 20px;
   display: flex;
   flex-direction: column;
-  width: 938px;
-  margin: 0px auto;
   & div {
     :last-child {
       align-items: flex-start;

@@ -94,7 +94,7 @@ export const Dropdown = ({
     if (selectedTab === 'filter' && option.endsWith('isOpen')) {
       onOpenIssues(option);
     } else {
-      onFilterIssues(selectedTab, option);
+      onFilterIssues?.(selectedTab, option);
     }
   };
 
