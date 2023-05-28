@@ -5,14 +5,7 @@ export const fetchData = async (path) => {
 };
 
 export const fetchAll = async (...url) => {
-  const response = [...url].map((url) => fetch(url));
-  const resData = await Promise.all(response);
-  const jsonObject = await Promise.all(resData.map((obj) => obj.json()));
-  return jsonObject;
-};
-
-const getFilterdIssues = async (tabId, filterOption) => {
-  const response = await fetchData(`${tabId}`);
+  const response = await Promise.all(url.map((path) => fetchData(path)));
   return response;
 };
 

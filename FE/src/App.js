@@ -22,7 +22,7 @@ const App = () => {
       <GlobalStyle />
       <BrowserRouter>
         <div className="App">
-          {/* {login.isLogin && <Header />} */}
+          {/* {login.isLogin && <Header />} userInfo 전역으로 두기 */}
           {<Header />}
           <Routes>
             <Route path="/" element={<Login />} />

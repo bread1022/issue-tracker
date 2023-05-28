@@ -12,15 +12,11 @@ export const TextArea = React.memo(({ label, size, value, setValue }) => {
 
   const [isTextAreaFocus, setIsTextAreaFocus] = useState(false);
 
-  const handleValueChange = (e) => {
-    setValue(e.target.value);
-  };
-
   return (
     <MyTextArea isFocus={isTextAreaFocus} areaSize={areaSize} value={value}>
       <textarea
         value={value}
-        onChange={handleValueChange}
+        onChange={(e) => setValue(e.target.value)}
         onFocus={() => setIsTextAreaFocus(true)}
         onBlur={() => setIsTextAreaFocus(false)}
       />

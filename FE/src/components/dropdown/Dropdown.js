@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 
 import styled from 'styled-components';
 
 import { DropdownPanel } from './DropdownPanel';
+import { FilterStateContext } from '../../pages/IssueList';
 import { fontSize } from '../../styles/font';
 import { fetchData } from '../../utils/fetch';
 import { Button } from '../button/Button';
@@ -26,10 +27,14 @@ export const Dropdown = ({
   optionalArea,
   selectedSideBarMenu
 }) => {
+  const { filterState, filterStateDispatch } = useContext(FilterStateContext);
+
   const [isDropDown, setIsDropDown] = useState(false);
+
   const [selectedOption, setSelectedOption] = useState('isOpen');
-  const [selectedTab, setSelectedTab] = useState('');
+  const [selectedTab, setSelectedTab] = useState(null);
   const [tabOptionsInfo, setTabOptionsInfo] = useState(null);
+
   const selectedSideBarItemInfo = tabOptionsInfo?.find(
     ({ id }) => id === Number(selectedOption)
   );
@@ -50,7 +55,7 @@ export const Dropdown = ({
     return () => window.removeEventListener('mousedown', handleClick);
   }, [panelRef]);
 
-  const handleDropdownTabMouseDown = (e) => {
+  const handleDropdownTabMouseDown = () => {
     setIsDropDown(!isDropDown);
     setSelectedTab(tabId);
     if (tabId === 'filter') return;
@@ -58,11 +63,11 @@ export const Dropdown = ({
   };
 
   const fetchSelectedTab = async (selectedTab, filterOptions) => {
-    const selectedTabApi =
+    const selectedTabAPI =
       selectedTab === 'assignees' || selectedTab === 'author'
         ? 'user'
         : selectedTab;
-    const response = await fetchData(`/${selectedTabApi}`);
+    const response = await fetchData(`/${selectedTabAPI}`);
     const tabData = await getFilteredOptions(filterOptions, response);
     setTabOptionsInfo(tabData);
   };
@@ -74,12 +79,27 @@ export const Dropdown = ({
   const handleSelectedOption = (option, selectedTab) => {
     if (option === selectedOption) {
       setSelectedOption('isOpen');
-      setSelectedTab('');
-      if (setValue) setValue('');
+      setSelectedTab(null);
+      if (setValue) setValue(null);
     } else {
       setSelectedOption(option);
       setSelectedTab(selectedTab);
       if (setValue) setValue(option);
+      filterStateDispatch({
+        type: 'FILTER-ISSUES',
+        payload: {
+          filterState: selectedTab,
+          id: option
+        }
+      });
+    }
+  };
+
+  const isSelected = (tabId, id, selectedOption) => {
+    if (tabId === 'filter' && id.endsWith('isOpen')) {
+      return (id === 'isOpen') === filterState.isOpen;
+    } else {
+      return String(id) === selectedOption;
     }
   };
 
@@ -99,6 +119,7 @@ export const Dropdown = ({
           selectedOption={selectedOption}
           handleSelectedOption={handleSelectedOption}
           optionalArea={optionalArea}
+          isSelected={isSelected}
         />
       )}
     </MyDropdown>

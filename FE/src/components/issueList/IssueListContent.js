@@ -7,15 +7,14 @@ import { IssueListContext } from '../../pages/IssueList';
 import { colors } from '../../styles/color';
 import { fontSize } from '../../styles/font';
 
-export const IssueListContent = React.memo(() => {
-  const issues = useContext(IssueListContext);
-  const issueListData = issues.issueList;
+export const IssueListContent = () => {
+  const { issuesInfo } = useContext(IssueListContext);
 
   return (
     <MyIssueListContent>
-      {issueListData
+      {issuesInfo
         ? (
-          issueListData.map((issueData) => (
+          issuesInfo.map((issueData) => (
             <IssueItem key={issueData.issueId} {...issueData} />
           ))
         )
@@ -24,7 +23,7 @@ export const IssueListContent = React.memo(() => {
         )}
     </MyIssueListContent>
   );
-});
+};
 
 const MyIssueListContent = styled.div`
   > div:not(:last-child) {

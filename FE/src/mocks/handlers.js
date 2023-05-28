@@ -43,11 +43,11 @@ export const handlers = [
     const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(commentData));
   }),
-  rest.get('/issues/id:1/open', (req, res, ctx) => {
+  rest.get('/issues/isOpen=true', (req, res, ctx) => {
     const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(openFilter));
   }),
-  rest.get('/issues/id:1/close', (req, res, ctx) => {
+  rest.get('/issues/isOpen=false', (req, res, ctx) => {
     const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(closeFilter));
   }),

@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useCallback } from 'react';
 
 import styled from 'styled-components';
 
 import { CheckboxStateContext } from './IssueListContainer';
-import { IssueListContext } from '../../pages/IssueList';
+import { IssueListContext, FilterStateContext } from '../../pages/IssueList';
 import { colors } from '../../styles/color';
 import { fontSize } from '../../styles/font';
 import { Button } from '../button/Button';
 import { CheckBox } from '../CheckBox';
 import { Dropdown } from '../dropdown/Dropdown';
-import { DropdownTabs } from '../dropdown/DropdownTabs';
+import { DropdownFilterTabs } from '../dropdown/DropdownFilterTabs';
 
-const checkTabsType = {
+const checkTabTypes = {
   tabId: 'checkTab',
   tabName: '상태 수정',
   tabOptions: [
@@ -58,8 +58,8 @@ const issueButtonTypes = [
 export const IssueListHeader = () => {
   const { checkState, checkDispatch } = useContext(CheckboxStateContext);
   const { isAllChecked, checkedIssues } = checkState;
-  const issues = useContext(IssueListContext);
-  const countInfo = issues.countInfo;
+  const { countInfo } = useContext(IssueListContext);
+  const { filterState, filterStateDispatch } = useContext(FilterStateContext);
 
   const handleCheckedIssueTabsClick = () => {
     if (isAllChecked) checkDispatch({ type: 'ALL_UNCHECK' });
@@ -68,7 +68,25 @@ export const IssueListHeader = () => {
     }
   };
 
-  const [activeTab, setActiveTab] = useState(true);
+  const handleFilterTabClick = useCallback((option, selectedTab) => {
+    filterStateDispatch({
+      type: 'FILTER-ISSUES',
+      payload: {
+        filterState: selectedTab,
+        id: option
+      }
+    });
+  });
+
+  const handleIsOpenTabClick = useCallback((tabId) => {
+    filterStateDispatch({
+      type: 'FILTER-ISSUES',
+      payload: {
+        filterState: 'filter',
+        id: tabId
+      }
+    });
+  });
 
   return (
     <MyIssueListHeader>
@@ -84,11 +102,11 @@ export const IssueListHeader = () => {
           )
           : (
             issueButtonTypes.map(
-              ({ buttonText, status, buttonOption }, index) => (
+              ({ tabId, buttonText, status, buttonOption }) => (
                 <Button
-                  key={index}
-                  active={activeTab === status}
-                  onClick={() => setActiveTab(status)}
+                  key={tabId}
+                  active={status === filterState.isOpen}
+                  onClick={() => handleIsOpenTabClick(tabId)}
                   {...buttonOption}
                   buttonText={`${buttonText} (${
                     status
@@ -100,7 +118,13 @@ export const IssueListHeader = () => {
             )
           )}
       </MyIssueTabs>
-      {isAllChecked ? <Dropdown {...checkTabsType} /> : <DropdownTabs />}
+      {isAllChecked
+        ? (
+          <Dropdown {...checkTabTypes} />
+        )
+        : (
+          <DropdownFilterTabs onClick={handleFilterTabClick} />
+        )}
     </MyIssueListHeader>
   );
 };

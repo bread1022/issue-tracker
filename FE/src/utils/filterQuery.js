@@ -4,20 +4,18 @@ export const getFilterQueryString = ({
   labels, // 중복가능
   milestone,
   assignees, // 중복가능
-  comments, // user 1명만
+  comments,
   isWrittenByMe,
   isAssignedToMe,
   commentedByMe
 }) => {
   return [
     `isOpen=${isOpen}`,
-    author && `&author=${author.id}`,
-    labels?.length ? `&labels=${labels.map(({ id }) => id).join(',')}` : null,
-    milestone && `&milestone=${milestone.id}`,
-    assignees?.length
-      ? `&assignees=${assignees.map(({ id }) => id).join(',')}`
-      : null,
-    comments && `&comments=${comments.id}`,
+    author && `&author=${author}`,
+    labels?.size ? `&labels=${[...labels].join(',')}` : null,
+    milestone && `&milestone=${milestone}`,
+    assignees?.size ? `&assignees=${[...assignees].join(',')}` : null,
+    comments && `&comments=${comments}`,
     isWrittenByMe && `&isWrittenByMe=${isWrittenByMe}`,
     isAssignedToMe && `&isAssignedToMe=${isAssignedToMe}`,
     commentedByMe && `&commentedByMe=${commentedByMe}`
@@ -38,11 +36,9 @@ export const convertFilterQueryToInputValue = ({
   return [
     `is:${isOpen ? 'open' : 'close'} is:issue`,
     author && `author:${author.id}`,
-    labels?.length ? `&labels=${labels.map(({ id }) => id).join(',')}` : null,
+    labels?.size ? `&labels=${[...labels].join(',')}` : null,
     milestone && `milestone:${milestone.id}`,
-    assignees?.length
-      ? `&assignees=${assignees.map(({ id }) => id).join(',')}`
-      : null,
+    assignees?.size ? `&assignees=${[...assignees].join(',')}` : null,
     comments && `comments:${comments.id}`,
     isWrittenByMe && `isWrittenByMe=@me`,
     isAssignedToMe && `isAssignedToMe=@me`,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 import { DropdownPanelItem } from './DropdownPanelItem';
@@ -15,15 +13,17 @@ export const DropdownPanel = ({
   isLeft,
   selectedOption,
   handleSelectedOption,
-  optionalArea
+  optionalArea,
+  isSelected
 }) => {
   const handleOptionClick = ({ currentTarget }) => {
     handleSelectedOption(currentTarget.id, currentTarget.getAttribute('value'));
   };
 
+  const MyDropdownPanel = type === 'sidebar' ? MySidebarPanel : MyDefaultPanel;
   const iconType =
     selectedOption === 'none' ? 'checkOnCircle' : 'checkOffCircle';
-  const MyDropdownPanel = type === 'sidebar' ? MySidebarPanel : MyDefaultPanel;
+
   return (
     <MyDropdownPanel isLeft={isLeft}>
       {type === 'sidebar' || (
@@ -45,7 +45,7 @@ export const DropdownPanel = ({
               tabId={tabId}
               id={option.id}
               {...option}
-              isSelected={String(option.id) === selectedOption}
+              isSelected={isSelected(tabId, option.id, selectedOption)}
               onMouseUp={handleOptionClick}
             />
           ))}

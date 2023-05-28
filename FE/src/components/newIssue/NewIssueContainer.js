@@ -1,10 +1,7 @@
-import { useContext } from 'react';
-
 import styled from 'styled-components';
 
 import { NewIssueContent } from './NewIssueContent';
 import { SideBar } from './Sidebar';
-import { NewIssueContext } from '../../pages/NewIssue';
 import { Profile } from '../Profile';
 
 export const NewIssueContainer = ({
@@ -16,11 +13,9 @@ export const NewIssueContainer = ({
   commentValue,
   milestoneSetValue
 }) => {
-  const issueData = useContext(NewIssueContext);
-
   return (
     <MyNewIssueContainer>
-      <Profile isLarge userInfo={issueData?.userInfo} />
+      <Profile isLarge userInfo={null} />
       <NewIssueContent
         titleValue={titleValue}
         titleSetValue={titleSetValue}

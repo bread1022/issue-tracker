@@ -10,7 +10,7 @@ import { fetchData } from '../utils/fetch';
 
 export const Header = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(null);
   const initData = async () => {
     const resData = await fetchData('/issues');
     setUser(resData);
