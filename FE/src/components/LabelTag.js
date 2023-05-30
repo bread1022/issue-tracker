@@ -45,6 +45,7 @@ const MydefaultTag = styled.div`
 `;
 
 const MyLabelsTag = styled(MydefaultTag)`
+  width: max-content;
   color: ${colors.gray50};
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: ${({ fontColor }) => fontColor};

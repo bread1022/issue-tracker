@@ -15,7 +15,7 @@ export const IssueListContent = () => {
       {issuesInfo
         ? (
           issuesInfo.map((issueData) => (
-            <IssueItem key={issueData.issueId} {...issueData} />
+            <IssueItem key={issueData.id} {...issueData} />
           ))
         )
         : (

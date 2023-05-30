@@ -38,8 +38,8 @@ export const checkBoxReducer = (state, action) => {
       const updateCheckedIssues = payload.reduce((acc, issue) => {
         if (checkedIssues.includes(issue.issueId) && issue.isOpen !== true) {
           issue.isOpen = true;
+          acc.push(issue);
         }
-        acc.push(issue);
         return acc;
       }, []);
       return {
@@ -52,8 +52,8 @@ export const checkBoxReducer = (state, action) => {
       const updateCheckedIssues = payload.reduce((acc, issue) => {
         if (checkedIssues.includes(issue.issueId) && issue.isOpen !== false) {
           issue.isOpen = false;
+          acc.push(issue);
         }
-        acc.push(issue);
         return acc;
       }, []);
       return {

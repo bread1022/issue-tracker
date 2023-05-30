@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 import { FilterSection } from '../components/filterSection/FiterSection';
 import { IssueListContainer } from '../components/issueList/IssueListContainer';
+import { IssueListHeader } from '../components/issueList/IssueListHeader';
 import {
   filterStateReducer,
   initialFilterState
 } from '../stores/filterStateReducer';
-import { fetchAll } from '../utils/fetch';
+import { fetchAll, fetchData } from '../utils/fetch';
 import { getFilterQueryString } from '../utils/filterQuery';
 
 export const FilterStateContext = React.createContext();
@@ -23,12 +24,19 @@ export const IssueList = () => {
   );
   const initData = async () => {
     try {
+      // const [issuesInfo, countInfo] = await fetchAll(
+      //   `/issues/${getFilterQueryString(filterState)}`,
+      //   `/issues/countInfo`
+      // );
+      // setIssuesInfo(issuesInfo);
+      // setCountInfo(countInfo.countInfo);
       const [issuesInfo, countInfo] = await fetchAll(
-        `/issues/${getFilterQueryString(filterState)}`,
-        `/issues`
+        `http://13.209.232.172:8080/issues`,
+        `http://13.209.232.172:8080/issues/countInfo`
       );
       setIssuesInfo(issuesInfo);
-      setCountInfo(countInfo.countInfo);
+      setCountInfo(countInfo);
+      console.log(issuesInfo, countInfo);
     } catch (err) {
       console.log(err);
     }
@@ -71,6 +79,8 @@ export const IssueList = () => {
         <MyIssueListPage>
           <FilterSection />
           <IssueListContainer />
+          {/* <IssueListHeader />
+          <IssueListContext /> */}
         </MyIssueListPage>
       </IssueListContext.Provider>
     </FilterStateContext.Provider>
