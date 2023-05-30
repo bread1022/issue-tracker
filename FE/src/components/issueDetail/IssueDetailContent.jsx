@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { CommentElements } from './CommentElements';
 import { IssueDetailContext } from '../../pages/IssueDetail';
+import { fontSize } from '../../styles/font';
+import { Button } from '../button/Button';
 import { TextArea } from '../textForm/TextArea';
 
 export const IssueDetailContent = () => {
@@ -16,17 +18,39 @@ export const IssueDetailContent = () => {
     value: comment,
     setValue: SetComment
   };
+
+  const addComment = {
+    size: 's',
+    color: 'containerBlue',
+    isIcon: true,
+    iconWidth: 11,
+    buttonText: '코멘트 작성',
+    iconType: 'plus',
+    disabled: comment.length < 1,
+    isLeftPosition: true
+  };
+
   return (
     <MyIssueDetailContent>
       {CommentInfo &&
         CommentInfo.map((comment) => (
           <CommentElements
             key={comment.userId}
-            userInfo={{ name: comment.userName, profileUrl: comment.userUrl }}
+            authorInfo={{
+              id: issueSubInfo.author.id,
+              name: issueSubInfo.author.name
+            }}
+            userInfo={{
+              id: comment.userId,
+              name: comment.userName,
+              profileUrl: comment.userUrl
+            }}
+            createTime={comment.createTime}
             reply={comment.replyContents}
           />
         ))}
       <TextArea {...commentInput} />
+      <Button {...addComment} />
     </MyIssueDetailContent>
   );
 };
@@ -35,8 +59,12 @@ const MyIssueDetailContent = styled.div`
   gap: 20px;
   display: flex;
   flex-direction: column;
-  width: 938px;
-  margin: 0px auto;
+  align-items: flex-end;
+
+  > button {
+    justify-content: center;
+    ${fontSize.S};
+  }
   & div {
     :last-child {
       align-items: flex-start;

@@ -21,8 +21,13 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.4'
     implementation 'mysql:mysql-connector-java:8.0.26'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
-    compileOnly 'org.projectlombok:lombok:1.18.20' // lombok의 버전을 프로젝트에 맞게 조정해주세요.
-//    implementation 'com.h2database:h2:2.1.214'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+
+    implementation 'com.amazonaws:aws-java-sdk-core:1.12.429'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.429'
+    implementation 'software.amazon.awssdk:s3:2.16.83'
+
 }
 
 tasks.named('test') {

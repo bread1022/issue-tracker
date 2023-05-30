@@ -16,59 +16,46 @@ import userData from './userData.json';
 
 export const handlers = [
   rest.get('/issues', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(issueData));
   }),
 
   rest.get('/labels', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(labelData));
   }),
 
   rest.get('/milestone', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(milestoneData));
   }),
 
   rest.get('/user', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(userData));
   }),
 
   rest.get('/issueDetail', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(detailData));
   }),
   rest.get('/issueDetail/comment', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(commentData));
   }),
-  rest.get('/issues/id:1/open', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
+  rest.get('/issues/isOpen=true', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(openFilter));
   }),
-  rest.get('/issues/id:1/close', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
+  rest.get('/issues/isOpen=false', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(closeFilter));
   }),
   rest.get('/issues/id:1/author', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(authorFilter));
   }),
   rest.get('/issues/id:1/assignee', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(assigneeFilter));
   }),
   rest.get('/issues/id:3/milestone', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(milestonFilter));
   }),
   rest.get('/issues/id:1/comment', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(commentFilter));
   }),
   rest.get('/issues/id:2/label', (req, res, ctx) => {
-    const status = req.url.searchParams.get('status');
     return res(ctx.status(200), ctx.json(labelFilter));
   })
 ];

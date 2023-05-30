@@ -12,9 +12,6 @@ import { fetchData } from '../utils/fetch';
 export const Login = () => {
   const navigate = useNavigate();
 
-  const idInputRef = useRef(null);
-  const pwInputRef = useRef(null);
-
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [isLogin, setIsLogin] = useState(true);
@@ -37,8 +34,6 @@ export const Login = () => {
       }
     });
     setIsLogin(false);
-    idInputRef.current.focus();
-    pwInputRef.current.focus();
   };
 
   const initData = async () => {
@@ -73,7 +68,7 @@ export const Login = () => {
       value: id,
       setValue: setId,
       loginValue: isLogin,
-      myInputRef: idInputRef
+      inputType: 'text'
     },
     {
       id: 2,
@@ -82,7 +77,7 @@ export const Login = () => {
       value: pw,
       setValue: setPw,
       loginValue: isLogin,
-      myInputRef: pwInputRef
+      inputType: 'password'
     }
   ];
 
@@ -117,8 +112,8 @@ export const Login = () => {
           height={login.height}
           value={login.value}
           setValue={login.setValue}
-          myInputRef={login.myInputRef}
           focusStyle={focusStyle}
+          inputType={login.inputType}
         />
       ))}
       <Button {...idLoginBtn} />

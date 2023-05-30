@@ -1,6 +1,6 @@
 package issuetracker.issuetracker.domain.page.dto;
 
-import issuetracker.issuetracker.domain.issue.dto.req.IssueDTO;
+import issuetracker.issuetracker.domain.issue.dto.IssueDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

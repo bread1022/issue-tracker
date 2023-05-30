@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MyHeader } from './Header';
 import { colors } from '../styles/color';
 
+// TODO: refactor - left, right 어색함 => title
 export const PageHeader = ({ leftChild, middleChild, rigthChild }) => {
   return (
     <MyPageHeader>
